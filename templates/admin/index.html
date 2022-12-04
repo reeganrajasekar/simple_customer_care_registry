@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyVoice</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="height:70px;background-color: #3388ff !important;">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="font-size:34px;font-weight: 600;">HappyVoice</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user" style="font-size:22px;font-weight: 600;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/user/logout" style="font-size:22px;font-weight: 600;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Description</th>
+                  <th scope="col" style="width:30%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in data %}
+                <tr>
+                    <td scope="row">{{i['ID']}}</td>
+                    <td>{{i['NAME']}}</td>
+                    <td>{{i['EMAIL']}}</td>
+                    <td>{{i['QUERY']}}</td>
+                    <td>
+                        <form action="/admin/update/{{i['ID']}}" method="post" style="display: flex;height:100%;align-items: flex-end;">
+                            <select class="form-select" name="data" style="margin-right:10px" required>
+                                <option value="{{i['DATA']}}" selected>{{i['DATA']}}</option>
+                                <option value="Waiting List">Waiting List</option>
+                                <option value="In progress">In progress</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                            <button class="btn btn-secondary">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <script src="/static/js/bootstrap.bundle.js"></script>
+</body>
+</html>

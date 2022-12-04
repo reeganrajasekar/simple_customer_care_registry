@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HappyVoice</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="height:70px;background-color: #3388ff !important;">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="font-size:34px;font-weight: 600;">HappyVoice</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/user" style="font-size:22px;font-weight: 600;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/user/logout" style="font-size:22px;font-weight: 600;">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <h4 style="color:#888;padding-left:100px">Welcome <span style="color:#3388ff">{{ session['name']}}</span> !</h4>
+    <br>
+    <div type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: fixed;bottom:20px; right:20px;height: 80px;width:80px;background-color: #3388ff;border-radius: 100%;box-shadow: 2px 2px 4px;"><h1 style="text-align: center;font-size:64px;color:#fff">+</h1></div>
+    <div class="container">
+        {% for i in data %}
+        <div class="card mb-3" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title" style="display: flex;justify-content:space-between">
+                    <span>{{i['NAME']}}</span>
+                    <span style="color:#3388ff;font-weight: 600;">{{i['DATA']}}</span>
+                </h5>
+                <br>
+                <h6 class="card-subtitle mb-2 text-muted">Query</h6>
+                <p class="card-text"> &ensp;&ensp; {{i['QUERY']}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create Query</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/user/create" method="POST">
+                    <div class="mb-3">
+                        <input type="text" required name="title" class="form-control" placeholder="Title" style="height:60px;font-size: 22px;background-color: #fff;" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-4">
+                        <label for="exampleFormControlTextarea1" class="form-label" style="color:#aaa">Query :</label>
+                        <textarea class="form-control" name="query" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button type="submit" aria-placeholder="Create your Query" class="btn btn-primary mb-1" style="width:100%;height:50px;font-weight: 600;font-size: 22px;">Post</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="/static/js/bootstrap.bundle.js"></script>
+</body>
+</html>
